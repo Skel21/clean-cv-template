@@ -1,202 +1,99 @@
-\documentclass[a4paper,10pt]{article}
-
-%----------------------------------------------------------------------------------------
-%	FONT
-%----------------------------------------------------------------------------------------
-
-% % fontspec allows you to use TTF/OTF fonts directly
-% \usepackage{fontspec}
-% \defaultfontfeatures{Ligatures=TeX}
-
-% % modified for ShareLaTeX use
-% \setmainfont[
-% SmallCapsFont = Fontin-SmallCaps.otf,
-% BoldFont = Fontin-Bold.otf,
-% ItalicFont = Fontin-Italic.otf
-% ]
-% {Fontin.otf}
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES
-%----------------------------------------------------------------------------------------
-\usepackage{url}
-\usepackage{parskip}
-\usepackage{paracol}
-
-%other packages for formatting
-\RequirePackage{color}
-\RequirePackage{graphicx}
-\usepackage[usenames,dvipsnames]{xcolor}
-\usepackage[margin=1in]{geometry}
-
-%tabularx environment
-\usepackage{tabularx}
-
-%for lists within experience section
-\usepackage{enumitem}
-
-% centered version of 'X' col. type
-\newcolumntype{C}{>{\centering\arraybackslash}X} 
-
-%to prevent spillover of tabular into next pages
-\usepackage{supertabular}
-\usepackage{tabularx}
-\newlength{\fullcollw}
-\setlength{\fullcollw}{0.47\textwidth}
-
-%custom \section
-\usepackage{titlesec}				
-\usepackage{multicol}
-\usepackage{multirow}
-
-%CV Sections inspired by: 
-%http://stefano.italians.nl/archives/26
-\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{10pt}{10pt}
-
-%for publications
-\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
-
-%Setup hyperref package, and colours for links
-\usepackage[unicode, draft=false]{hyperref}
-\definecolor{linkcolour}{rgb}{0,0.2,0.6}
-\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
-\addbibresource{citations.bib}
-\setlength\bibitemsep{1em}
-
-%for social icons
-\usepackage{fontawesome5}
-
-%debug page outer frames
-%\usepackage{showframe}
+\documentclass{./cv}
 
 
-% job listing environments
-\newenvironment{jobshort}[2]
-    {
-    \begin{tabularx}{\linewidth}{@{}l X r@{}}
-    \textbf{#1} & \hfill &  #2 \\[3.75pt]
-    \end{tabularx}
-    }
-    {
-    }
-
-\newenvironment{joblong}[2]
-    {
-    \begin{tabularx}{\linewidth}{@{}l X r@{}}
-    \textbf{#1} & \hfill &  #2 \\[3.75pt]
-    \end{tabularx}
-    \begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]
-    }
-    {
-    \end{itemize}
-    \end{minipage}    
-    }
-
-
-
-%----------------------------------------------------------------------------------------
-%	BEGIN DOCUMENT
-%----------------------------------------------------------------------------------------
 \begin{document}
 
-% non-numbered pages
-\pagestyle{empty} 
+\begin{cvheader}{ NameSurname}
+    \begin{contactdetails}
+        \item \email{name.lastname@domain.com}
+        \item \phone{00\,000\,00\,00}
+        \item \githubpages{username}
+        \item \linkedin{username}
+    \end{contactdetails}
+    \begin{contactdetails}
+        \item \nationality{Citizenship}
+        \item \address{City, Country}
+    \end{contactdetails}
+\end{cvheader}
 
-%----------------------------------------------------------------------------------------
-%	TITLE
-%----------------------------------------------------------------------------------------
+\vspace{-1em}
+\begin{cvsection}{}
+MSc student in \emph{Materials Science at ETH City}, with a deep interest in \emph{condensed matter}, \emph{computational methods}, \emph{quantum computing} and quantum materials. With strong experience in \emph{data analysis} and \emph{machine learning}, I aim to deepen our understanding of \emph{quantum systems} and to develop new methods for exploring them, pushing both my skills and scientific progress forward.
+\end{cvsection}
 
-% \begin{tabularx}{\linewidth}{ @{}X X@{} }
-% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
-% \raisebox{-0.05\height}\faGithub\ username \ | \
-% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
-% \end{tabularx}
 
-\begin{tabularx}{\linewidth}{@{} C @{}}
-\Huge{ NameSurname} \\[7.5pt]
-\href{https://username.github.io}{\raisebox{-0.05\height}\faGlobe \ username.github.io} \ $|$ \ 
-\href{www.linkedin.com/in/username}{\raisebox{-0.05\height}\faLinkedin\ username} \ $|$ \ 
-\href{mailto:name.lastname@domain.com}{\raisebox{-0.05\height}\faEnvelope \ name.lastname@domain.com} \\ %\ $|$ \ 
-%\href{tel:}{\raisebox{-0.05\height}\faMobile \} \\
-\end{tabularx}
+\begin{cvsection}{Work Experience}
+    \experience{Research Assistant, ETH City}{Sep 2024 --- Jun 2025}
+    \begin{descrlist}
+        \item Large scale molecular dynamics software development (Python, C++)
+        \item Graph neural networks and group equivariance implementation
+    \end{descrlist}
+    \experience{Mathematics and Physics Tutor}{Sep 2021 --- present}
+    \begin{descrlist}
+        \item International competition and exam preparation
+        \item Poster and presentation guidance, science popularization
+    \end{descrlist}
+    \experience{Machine Learning and Web Dev Engineer, Intellectus.app}{Mar 2023 --- Mar 2024}
+    \begin{descrlist}
+        \item Website prototyping (Python, Vue.js)
+        \item ML for automated performance tracking
+    \end{descrlist}
+\end{cvsection}
 
-%----------------------------------------------------------------------------------------
-% EXPERIENCE SECTIONS
-%----------------------------------------------------------------------------------------
 
-%Interests/ Keywords/ Summary
-\section{Summary}
-MSc student in \textbf{Materials Science at ETH City}, with a deep interest in \textbf{condensed matter}, \textbf{computational methods}, \textbf{quantum computing} and quantum materials. With strong experience in \textbf{data analysis} and \textbf{machine learning}, I aim to deepen our understanding of \textbf{quantum systems} and to develop new methods for exploring them, pushing both my skills and scientific progress forward.
+\begin{cvsection}{Projects}
+    \experience{Emergent fracton behavior in two dimensions}{Apr 2025 --- present}
+    \begin{descrlist}
+        \item Tensor network simulations (DMRG) and analytical solutions (Bethe Ansatz)
+        \item Topological quasiparticles in graphene as a platform for quantum memory
+    \end{descrlist}
+    \experience{Computational Transition Metal Oxide band structure determination}{Jan 2024 --- Jul 2024}
+    \begin{descrlist}
+        \item Tight Binding and DFT solver implementation for Schrodinger-like equation
+        \item Materials evaluation for electrochemical hydrogen production device
+    \end{descrlist}
+\end{cvsection}
 
-%Experience
-\section{Work Experience}
-\begin{joblong}{Research Assistant, ETH City}{Sep 2024 --- Jun 2025}
-    \item Large scale molecular dynamics software development (Python, C++)
-    \item Graph neural networks and group equivariance implementation
-\end{joblong}
 
-\begin{joblong}{Mathematics and Physics Tutor}{Sep 2021 --- now}
-    \item International competition preparation
-    \item Poster and presentation guidance
-\end{joblong}
+\begin{cvsection}{Education}
+    \experience{M.Sc. Materials Science, ETH City}{Sep 2024 --- present}
+    \begin{descr}
+        \textit{Computational Methods \,\vbar\, Advanced Condensed Matter \,\vbar\, Quantum Information Processing}
+    \end{descr}
+    \begin{descrlist}
+        \item Young Physicists Forum committee member
+    \end{descrlist}
+    \experience{B.Sc. Physics (Advanced Track), University of Warsaw}{Oct 2021 --- Jul 2024}
+    \begin{descr}
+        \textit{Strong Mathematical Background \,\vbar\, Quantum Mechanics and Chemistry \,\vbar\, Machine Learning}
+    \end{descr}
+    \begin{descrlist}
+        \item Competitive interdisciplinary program, for 10\% best students
+    \end{descrlist}
+\end{cvsection}
 
-\begin{joblong}{Machine Learning and Web Dev Engineer, Intellectus.app}{Mar 2023 --- Mar 2024}
-    \item Website prototyping (Python, Vue.js)
-    \item ML for automated performance tracking
-\end{joblong}
-% TODO: add tutoring?
-  
-%Projects
-\section{Projects}
+%\sectiondivider
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }% \href{https://some-link.com}{Link to Demo}
-\textbf{Emergent fracton behavior in two dimensions} & \hfill \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{Analysed quantum systems using numerical simulations (DMRG) and analytical models (Bethe Ansatz)}  \\
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{ @{}l r@{} }% \href{https://some-link.com}{Link to Demo}
-\textbf{Computational Transition Metal Oxide band structure determination} & \hfill \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{Implemented LCAO and DFT solvers for Schrödinger-like equations to determine electronic bands}  \\
-\end{tabularx}
-
-%----------------------------------------------------------------------------------------
-%	EDUCATION
-%----------------------------------------------------------------------------------------
-\section{Education}
-\begin{tabularx}{\linewidth}{@{}l X@{}}	
-2024-09 --- present & \textbf{Materials Science}, M.Sc. \hfill \textbf{ETH City, Country} \\[3.75pt]
-& Theory of materials focus; Young Physicists Forum board member \\[6pt]
-
-2021-10 --- 2024-07 & \textbf{Physics (Advanced)}, B.Sc. \hfill \textbf{University of Warsaw, Poland} \\[3.75pt]
-& Theoretical focus, laboratory classes; Physics Tournaments Club member \\[6pt]
-
-\end{tabularx}
-
-%----------------------------------------------------------------------------------------
-%	PUBLICATIONS
-%----------------------------------------------------------------------------------------
-%\section{Publications}
-%\begin{refsection}[citations.bib]
-%\nocite{*}
-%\printbibliography[heading=none]
-%\end{refsection}
-
-%----------------------------------------------------------------------------------------
-%	SKILLS
-%----------------------------------------------------------------------------------------
-\section{Skills}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-\textbf{Languages} & \normalsize{English -- C2;  Citizenship-- C2; German -- A2} \\[6pt]
-\textbf{Awards} & \begin{minipage}[t]{\linewidth}\footnotesize
-2024-11 -- ETH  CityMatlab Simulathon, 1st place\\
-2024-03 -- ETH  CityInternational Physicists' Tournament, contestant\\
-2023-03 -- University of Warsaw Integration Bee, 2nd place\\
-2021-11 -- University Physics Competition, Bronze Medal\\
-2021-10 -- University Rector Scholarship for academic performance\\
-2021-05 -- National Physics Olympiad, 13th place
-\end{minipage} \\[3.75pt]
-\end{tabularx}
+\begin{cvsection}{Languages}
+    \begin{languages}
+        \item English -- C2
+        \item  Citizenship-- C2
+        \item German -- A2
+    \end{languages}
+\end{cvsection}
+\begin{cvsection}{Awards}
+    \begin{awards}
+        \item[2024-11 --] ETH  CityMATLAB Simulathon -- 1st place
+        \item[2024-03 --] ETH  CityInternational Physicists’ Tournament
+        \item[2023-03 --] University of Warsaw Integration Bee -- 2nd place
+        \item[2021-11 --] University Physics Competition -- Bronze Medal
+        \item[2021-10 --] University Scholarship for academic excellence
+        \item[2021-05 --] National Physics Olympiad -- 13th place
+    \end{awards}
+\end{cvsection}
 
 \end{document}
+
+% TODO: Horizontal and vertical condensed lists
+% TODO: Two column layout
+% TODO: Links to projects

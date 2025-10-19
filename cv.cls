@@ -58,29 +58,8 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Custom commands and environments
+% Clean contact details formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand\vbar{\kern1pt\rule[-\dp\strutbox]{.6pt}{\baselineskip}\kern1pt}
-
-\newenvironment{cvheader}[1]{
-    \begin{center}
-        {\Huge{#1}}
-}{
-    \end{center}
-}
-
-\newenvironment{contactdetails}{
-    \begin{center}
-    \begin{enumerate*}[label={},itemjoin={\enspace\vbar\enspace}]
-}{
-    \end{enumerate*}
-    \end{center}
-    \vspace{-0.25em}
-}
-
-
-% Contact details
 \newcommand{\phone}[1]{\href{tel:#1}{\raisebox{-0.05\height}{\faIcon{mobile-alt}} \ #1}}
 \newcommand{\email}[1]{\href{mailto:#1}{\raisebox{-0.05\height}{\faIcon[regular]{envelope}} \ #1}}
 \newcommand{\address}[1]{\raisebox{-0.05\height}{\faIcon{map-marker-alt}} \ #1}
@@ -90,6 +69,31 @@
 \newcommand{\website}[2]{\href{#1}{\raisebox{-0.05\height}{\faIcon{globe}} \ #2}}
 \newcommand{\nationality}[1]{\raisebox{-0.05\height}{\faIcon[regular]{flag}} \ #1}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Headers and sections formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\vbar{\kern1pt\rule[-\dp\strutbox]{.6pt}{\baselineskip}\kern1pt}
+
+\newenvironment{cvheader}[1]{
+    \begin{center}
+        {\Huge{#1}}\\[8pt]
+}{
+    \end{center}
+}
+
+\newenvironment{horizontallist}{
+    \par
+    \begin{enumerate*}[label={},itemjoin={\enspace\vbar\enspace}]
+}{
+    \end{enumerate*}
+}
+
+\newenvironment{verticallist}{
+    \par
+    \begin{enumerate}[label={},itemsep=0.35em,parsep=0pt,topsep=0.2em,leftmargin=*,align=left]
+}{
+    \end{enumerate}
+}
 
 % Document's section formatting
 \titleformat{\section}
@@ -123,6 +127,10 @@
     \end{addmargin}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections content formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Header for each 'experience' entry
 \newcommand{\experience}[2] {
     \vspace{0.25em}
@@ -144,18 +152,4 @@
     \begin{addmargin}[\descrindent]{0pt}
 }{
     \end{addmargin}
-}
-
-% Some not-yet-generalized environments
-\newenvironment{languages}{
-    \vspace{-0.35em}
-    \begin{enumerate*}[label={},itemjoin={\enspace\vbar\enspace}]
-}{
-    \end{enumerate*}
-}
-
-\newenvironment{awards}{
-    \begin{enumerate}[leftmargin=*,align=left]
-}{
-    \end{enumerate}
 }

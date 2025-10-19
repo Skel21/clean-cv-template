@@ -7,22 +7,30 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Edit here with the names of your latex file and directory (can use ".")
-      DIR: .
-      FILE: cv
+      DIR: ./src
+      FILE-GENERAL: cv
+      FILE-QUANTUM: cv_quantum
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
       - name: cv
         uses: dante-ev/latex-action@latest
         with:
-          root_file: ${{ env.FILE }}
+          root_file: ${{ env.FILE-GENERAL }}
           working_directory: ${{ env.DIR }}
-      - name: move
-        run: mkdir -p github_artifacts && mv ${{ env.DIR }}/${{ env.FILE }}.pdf ./github_artifacts/
+      - name: cv-quantum
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: ${{ env.FILE-QUANTUM }}
+          working_directory: ${{ env.DIR }}
+      - name: move general
+        run: mkdir -p github_artifacts && mv ${{ env.DIR }}/${{ env.FILE-GENERAL }}.pdf ./github_artifacts/
+      - name: move quantum
+        run: mkdir -p github_artifacts && mv ${{ env.DIR }}/${{ env.FILE-QUANTUM }}.pdf ./github_artifacts/
       - name: Upload pdf as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.FILE }}.pdf
+          name: pdfs
           path: ./github_artifacts
   deploy:
     needs: [build]

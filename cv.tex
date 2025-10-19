@@ -1,32 +1,4 @@
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
-%	The MIT License (MIT)
-%
-%	Copyright (c) 2021 Jitin Nair
-%
-%	Permission is hereby granted, free of charge, to any person obtaining a copy
-%	of this software and associated documentation files (the "Software"), to deal
-%	in the Software without restriction, including without limitation the rights
-%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-%	copies of the Software, and to permit persons to whom the Software is
-%	furnished to do so, subject to the following conditions:
-%	
-%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-%	THE SOFTWARE.
-%	
-%
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
-
-%----------------------------------------------------------------------------------------
-%	DOCUMENT DEFINITION
-%----------------------------------------------------------------------------------------
-
-% article class because we want to fully customize the page and not use a cv template
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,10pt]{article}
 
 %----------------------------------------------------------------------------------------
 %	FONT
@@ -48,13 +20,14 @@
 %	PACKAGES
 %----------------------------------------------------------------------------------------
 \usepackage{url}
-\usepackage{parskip} 	
+\usepackage{parskip}
+\usepackage{paracol}
 
 %other packages for formatting
 \RequirePackage{color}
 \RequirePackage{graphicx}
 \usepackage[usenames,dvipsnames]{xcolor}
-\usepackage[scale=0.9]{geometry}
+\usepackage[margin=1in]{geometry}
 
 %tabularx environment
 \usepackage{tabularx}
@@ -143,9 +116,8 @@
 
 \begin{tabularx}{\linewidth}{@{} C @{}}
 \Huge{ NameSurname} \\[7.5pt]
-\href{https://github.com/Skel21}{\raisebox{-0.05\height}\faGithub\ Skel21} \ $|$ \ 
-\href{www.linkedin.com/in/username}{\raisebox{-0.05\height}\faLinkedin\ username} \ $|$ \ 
 \href{https://username.github.io}{\raisebox{-0.05\height}\faGlobe \ username.github.io} \ $|$ \ 
+\href{www.linkedin.com/in/username}{\raisebox{-0.05\height}\faLinkedin\ username} \ $|$ \ 
 \href{mailto:name.lastname@domain.com}{\raisebox{-0.05\height}\faEnvelope \ name.lastname@domain.com} \\ %\ $|$ \ 
 %\href{tel:}{\raisebox{-0.05\height}\faMobile \} \\
 \end{tabularx}
@@ -156,21 +128,21 @@
 
 %Interests/ Keywords/ Summary
 \section{Summary}
-MSc student in Materials Science at ETH  Citywith a strong foundation in theoretical and computational methods. Experienced in numerical modelling, data analysis, and machine learning, complemented by hands-on experience in laboratory research. Interested in applying quantitative approaches to advance understanding of complex physical and technological systems.
+MSc student in \textbf{Materials Science at ETH City}, with a deep interest in \textbf{condensed matter}, \textbf{computational methods}, \textbf{quantum computing} and quantum materials. With strong experience in \textbf{data analysis} and \textbf{machine learning}, I aim to deepen our understanding of \textbf{quantum systems} and to develop new methods for exploring them, pushing both my skills and scientific progress forward.
 
 %Experience
 \section{Work Experience}
-\begin{joblong}{Electrochemical Data analysis @ Swistor SA}{Jun 2025 --- Sep 2025}
-    \item Development of Python data analysis tool
-    \item Energy storage device preparation, testing and evaluation
+\begin{joblong}{Research Assistant, ETH City}{Sep 2024 --- Jun 2025}
+    \item Large scale molecular dynamics software development (Python, C++)
+    \item Graph neural networks and group equivariance implementation
 \end{joblong}
 
-\begin{joblong}{Research Assistant @ ETH City}{Sep 2024 --- Jun 2025}
-    \item Developing molecular dynamics and graph neural network tools
-    \item Optimising modelling workflows for complex physical systems
+\begin{joblong}{Mathematics and Physics Tutor}{Sep 2021 --- now}
+    \item International competition preparation
+    \item Poster and presentation guidance
 \end{joblong}
 
-\begin{joblong}{ML and Web Development @ Intellectus.app}{Mar 2023 --- Mar 2024}
+\begin{joblong}{Machine Learning and Web Dev Engineer, Intellectus.app}{Mar 2023 --- Mar 2024}
     \item Website prototyping (Python, Vue.js)
     \item ML for automated performance tracking
 \end{joblong}
@@ -181,17 +153,12 @@ MSc student in Materials Science at ETH  Citywith a strong foundation in theoret
 
 \begin{tabularx}{\linewidth}{ @{}l r@{} }% \href{https://some-link.com}{Link to Demo}
 \textbf{Emergent fracton behavior in two dimensions} & \hfill \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{Analysed quantum systems using numerical simulations and analytical models (Python/Julia)}  \\
+\multicolumn{2}{@{}X@{}}{Analysed quantum systems using numerical simulations (DMRG) and analytical models (Bethe Ansatz)}  \\
 \end{tabularx}
 
 \begin{tabularx}{\linewidth}{ @{}l r@{} }% \href{https://some-link.com}{Link to Demo}
 \textbf{Computational Transition Metal Oxide band structure determination} & \hfill \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{Implemented solvers for Schrödinger-like equations to determine electronic bands}  \\
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{ @{}l r@{} }% \href{https://some-link.com}{Link to Demo}
-\textbf{XPS studies of phase separation in organic solar cell} & \hfill \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{Applied quantitative data analysis to link experimental and theoretical results}  \\
+\multicolumn{2}{@{}X@{}}{Implemented LCAO and DFT solvers for Schrödinger-like equations to determine electronic bands}  \\
 \end{tabularx}
 
 %----------------------------------------------------------------------------------------
@@ -199,11 +166,11 @@ MSc student in Materials Science at ETH  Citywith a strong foundation in theoret
 %----------------------------------------------------------------------------------------
 \section{Education}
 \begin{tabularx}{\linewidth}{@{}l X@{}}	
-2024-09 --- present & \textbf{Materials Science and Engineering}, M.Sc. \hfill \textbf{ETH City, Country} \\[3.75pt]
-& Theory of materials focus; Computational and mathematical methods \\[6pt]
+2024-09 --- present & \textbf{Materials Science}, M.Sc. \hfill \textbf{ETH City, Country} \\[3.75pt]
+& Theory of materials focus; Young Physicists Forum board member \\[6pt]
 
-2021-10 --- 2024-07 & \textbf{Physics (Advanced interdisciplinary path)}, B.Sc. \hfill \textbf{University of Warsaw, Poland} \\[3.75pt]
-& Strong theoretical focus; Advanced physics and chemistry laboratory classes \\[6pt]
+2021-10 --- 2024-07 & \textbf{Physics (Advanced)}, B.Sc. \hfill \textbf{University of Warsaw, Poland} \\[3.75pt]
+& Theoretical focus, laboratory classes; Physics Tournaments Club member \\[6pt]
 
 \end{tabularx}
 
@@ -231,8 +198,5 @@ MSc student in Materials Science at ETH  Citywith a strong foundation in theoret
 2021-05 -- National Physics Olympiad, 13th place
 \end{minipage} \\[3.75pt]
 \end{tabularx}
-
-%\vfill
-\center{\footnotesize Last updated: \today}
 
 \end{document}

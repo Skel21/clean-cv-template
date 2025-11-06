@@ -36,6 +36,7 @@
 \RequirePackage{scrextend}
 \RequirePackage[unicode, draft=false]{hyperref}
 \RequirePackage{fontawesome5}
+\RequirePackage{pifont}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Colors
@@ -60,6 +61,7 @@
 }
 \pagestyle{empty}
 \columnratio{\twocolumnratio}
+\setlength\columnsep{30pt}
 
 \DeclareEmphSequence{\bfseries}
 
@@ -169,4 +171,38 @@
     \begin{addmargin}[\descrindent]{0pt}
 }{
     \end{addmargin}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Two column specific settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{tightverticallist}{
+    \par
+    \begin{enumerate}[label={},itemsep=0.35em,parsep=0pt,topsep=0.2em,leftmargin=*,align=left]
+}{
+    \end{enumerate}
+}
+
+\newenvironment{tightcvsubsection}[1]{
+    \subsection{#1}
+    \vspace{0.25em}
+}{
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections content formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Different forms of descriptions of 'experience' entries
+\newenvironment{tightdescrlist} {
+    \vspace{-0.35em}
+    \begin{itemize}[parsep=0.0em, leftmargin=*,align=left]
+} {
+    \end{itemize}
+}
+
+\newenvironment{tightdescr} {
+    \vspace{-0.5em}
+}{
 }

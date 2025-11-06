@@ -37,8 +37,19 @@
 \RequirePackage[unicode, draft=false]{hyperref}
 \RequirePackage{fontawesome5}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{accentcolor}{RGB}{0, 68, 102} % Deep blue
+\definecolor{secondarycolor}{RGB}{80, 80, 80} % Dark gray
 \definecolor{linkcolour}{rgb}{0,0.2,0.6}
-\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+\hypersetup{colorlinks,breaklinks,urlcolor=accentcolor,linkcolor=accentcolor}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage[bitstream-charter]{mathdesign}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,30 +64,36 @@
 \DeclareEmphSequence{\bfseries}
 
 % More variables
-\setlength{\contentindent}{1.5em}
-\setlength{\descrindent}{1.5em}
+\setlength{\contentindent}{2.0em}
+\setlength{\descrindent}{2.0em}
+%\setlength{\columnseprule}{0.4pt}
 
+\renewcommand{\titlerule}{\vspace{-\baselineskip}\rule{\linewidth}{0.4pt}\vspace{-\parskip}}
+\renewcommand\labelitemi{\ding{70}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Clean contact details formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\phone}[1]{\href{tel:#1}{\raisebox{-0.05\height}{\faIcon{mobile-alt}} \ #1}}
-\newcommand{\email}[1]{\href{mailto:#1}{\raisebox{-0.05\height}{\faIcon[regular]{envelope}} \ #1}}
-\newcommand{\address}[1]{\raisebox{-0.05\height}{\faIcon{map-marker-alt}} \ #1}
-\newcommand{\linkedin}[1]{\href{https://www.linkedin.com/in/#1}{\raisebox{-0.05\height}{\faIcon{linkedin}} \ #1}}
-\newcommand{\github}[1]{\href{https://github.com/#1}{\raisebox{-0.05\height}{\faIcon{github}} \ #1}}
-\newcommand{\githubpages}[1]{\href{https://#1.github.io}{\raisebox{-0.05\height}{\faIcon{github-alt}} \ #1.github.io}}
-\newcommand{\website}[2]{\href{#1}{\raisebox{-0.05\height}{\faIcon{globe}} \ #2}}
-\newcommand{\nationality}[1]{\raisebox{-0.05\height}{\faIcon[regular]{flag}} \ #1}
+\newcommand{\iconbox}[1]{\makebox[1.2em][c]{\textcolor{accentcolor}{#1}}}
+
+\newcommand{\phone}[1]{\href{tel:#1}{\iconbox{\faIcon{mobile-alt}} #1}}
+\newcommand{\email}[1]{\href{mailto:#1}{\iconbox{\faIcon[regular]{envelope}} #1}}
+\newcommand{\address}[1]{\iconbox{\faIcon{map-marker-alt}} #1}
+\newcommand{\linkedin}[1]{\href{https://www.linkedin.com/in/#1}{\iconbox{\faIcon{linkedin}} #1}}
+\newcommand{\github}[1]{\href{https://github.com/#1}{\iconbox{\faIcon{github}} #1}}
+\newcommand{\githubpages}[1]{\href{https://#1.github.io}{\iconbox{\faIcon{github-alt}} #1.github.io}}
+\newcommand{\website}[2]{\href{#1}{\iconbox{\faIcon{globe}} #2}}
+\newcommand{\nationality}[1]{\iconbox{\faIcon[regular]{flag}} #1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Headers and sections formatting
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand\vbar{\kern1pt\rule[-\dp\strutbox]{.6pt}{\baselineskip}\kern1pt}
+\newcommand\vbar{\kern1pt\textcolor{secondarycolor}{\rule[-\dp\strutbox]{.6pt}{\baselineskip}}\kern1pt}
 
 \newenvironment{cvheader}[1]{
     \begin{center}
-        {\Huge{#1}}\\[8pt]
+        {\Huge\color{accentcolor}\textbf{#1}}\\[4pt]
+        {\color{accentcolor}\rule{6cm}{1.2pt}}\\[8pt]
 }{
     \end{center}
 }
@@ -97,12 +114,12 @@
 
 % Document's section formatting
 \titleformat{\section}
-    {\large\scshape\raggedright}{}{0em}{}[\titlerule]
+    {\large\scshape\raggedright\color{accentcolor}}{}{0em}{}[\titlerule]
 \titlespacing*{\section}{0pt}{12pt}{4pt}
 % Subsection formatting: similar to section but without the horizontal rule
 \titleformat{\subsection}
-    {\large\bfseries\raggedright}{}{0em}{}
-\titlespacing*{\subsection}{0pt}{8pt}{2pt}
+    {\large\bfseries\raggedright}{}{0em}{\vspace{-1.0em}}[{\rule{8em}{0.4pt}}]
+\titlespacing*{\subsection}{0pt}{10pt}{0pt}
 
 % Horizontal divider between sections
 \newcommand{\sectiondivider}{
@@ -132,9 +149,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Header for each 'experience' entry
-\newcommand{\experience}[2] {
+\newcommand{\experience}[2]{
     \vspace{0.25em}
-    \textbf{#1} \hfill #2
+    \textbf{#1} \hfill {\color{secondarycolor}\textit{#2}}
 }
 
 % Different forms of descriptions of 'experience' entries

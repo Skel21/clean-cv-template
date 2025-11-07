@@ -1,3 +1,6 @@
 cv/
 .vscode/
-/src/**
+/src/**/
+!/src/
+!/src/sections/
+!/src/sections/**

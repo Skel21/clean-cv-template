@@ -20,7 +20,7 @@
 
 \LoadClass[a4paper]{article}
 
-\RequirePackage[margin=0.75in]{geometry} % TODO: adjustable margin
+\RequirePackage[margin=0.75in]{geometry}
 \RequirePackage{url}
 \RequirePackage{parskip}
 \RequirePackage{color}
@@ -40,7 +40,7 @@
 \RequirePackage{marginnote}
 \RequirePackage{tcolorbox}
 \RequirePackage[T1]{fontenc}
-\RequirePackage[bitstream-charter]{mathdesign} % Font
+\RequirePackage[bitstream-charter]{mathdesign}
 \RequirePackage{paracol}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,9 +48,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Colors
-\definecolor{accentcolor}{RGB}{0, 68, 102} % Deep blue
-\definecolor{secondarycolor}{RGB}{80, 80, 80} % Dark gray
-\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\definecolor{accentcolor}{RGB}{0, 68, 102}
+\definecolor{secondarycolor}{RGB}{80, 80, 80}
 
 % Hyperlink setup
 \hypersetup{
@@ -68,14 +67,13 @@
 
 % Two-column settings
 \def\twocolumnratio{0.31}
-%\setlength{\columnseprule}{0.4pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document setup
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \AtBeginDocument{
-    \vspace*{-0.6in} % Reduce top margin
+    \vspace*{-0.6in}
     \columnratio{\twocolumnratio}
     \setlength\columnsep{30pt}
 }
@@ -94,7 +92,7 @@
 % Ensures consistent icon alignment
 \newcommand{\iconbox}[1]{\makebox[1.2em][c]{\textcolor{accentcolor}{#1}}}
 
-% COntact detail commands
+% Contact detail commands
 \newcommand{\phone}[1]{\href{tel:#1}{\iconbox{\faIcon{mobile-alt}} #1}}
 \newcommand{\email}[1]{\href{mailto:#1}{\iconbox{\faIcon[regular]{envelope}} #1}}
 \newcommand{\address}[1]{\iconbox{\faIcon{map-marker-alt}} #1}
@@ -104,11 +102,11 @@
 \newcommand{\website}[2]{\href{#1}{\iconbox{\faIcon{globe}} #2}}
 \newcommand{\nationality}[1]{\iconbox{\faIcon[regular]{flag}} #1}
 
-% TODO: away from here
+% Separator bar
 \renewcommand{\titlerule}{\vspace{-\baselineskip}\rule{\linewidth}{0.4pt}\vspace{-\parskip}}
 \newcommand\vbar{\kern1pt\textcolor{secondarycolor}{\rule[-\dp\strutbox]{.6pt}{\baselineskip}}\kern1pt}
 
-% Header environment: \begin{header}{Your Name} ... \end{header}
+% Header environment
 \newenvironment{cvheader}[1]{
     \begin{center}
         {\Huge\color{accentcolor}\textbf{#1}}\\[4pt]
@@ -126,7 +124,7 @@
     {\large\scshape\raggedright\color{accentcolor}}{}{0em}{}[\titlerule]
 \titlespacing*{\section}{0pt}{12pt}{4pt}
 
-% Subsection (Similar to section but without smallcaps and with reduced rule)
+% Subsection
 \titleformat{\subsection}
     {\large\bfseries\raggedright}{}{0em}{\vspace{-1.0em}}[{\rule{8em}{0.4pt}}]
 \titlespacing*{\subsection}{0pt}{10pt}{0pt}
@@ -139,10 +137,10 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Environments
+% List Environments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Small list for skills, contact details etc.
+% Horizontal list for skills, contact details etc.
 \newenvironment{horizontallist}{
     \par
     \begin{enumerate*}[label={},itemjoin={\enspace\vbar\enspace}]
@@ -150,7 +148,7 @@
     \end{enumerate*}
 }
 
-% Vertical version
+% Vertical list
 \newenvironment{verticallist}{
     \par
     \begin{enumerate}[label={},itemsep=0.35em,parsep=0pt,topsep=0.2em,leftmargin=*,align=left]
@@ -158,8 +156,11 @@
     \end{enumerate}
 }
 
-% Standard CV section with indented content:
-% \begin{cvsection}{Section Title} ... \end{cvsection}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section Environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Standard CV section with indented content
 \newenvironment{cvsection}[1]{
     \section{#1}
     \vspace{0.25em}
@@ -184,13 +185,50 @@
 }{
 }
 
-% Header of "experience" entry like specific job, school etc. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Experience Entry Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Basic experience header: \experience{Title}{Date}
 \newcommand{\experience}[2]{
     \vspace{0.25em}
     \textbf{#1} \hfill {\color{secondarycolor}\textit{#2}}
 }
 
-% Description of "experience" entry (list form)
+% Experience with organization: \experienceorg{Title}{Organization}{Date}
+\newcommand{\experienceorg}[3]{
+    \vspace{0.25em}
+    \textbf{#1}, \textit{#2} \hfill {\color{secondarycolor}\textit{#3}}
+}
+
+% Metadata line (for references, additional info)
+% Usage: \metaline{Reference: Dr. Name \hfill \email{...}}
+\newcommand{\metaline}[1]{
+    \par\vspace{-\parskip}\noindent{\small\color{secondarycolor}\textit{#1}}
+}
+
+% Specialized reference command (not integral to the template)
+\newcommand{\reference}[2]{
+    \metaline{Reference: #1\hfill#2}
+}
+
+% Tags/keywords line (separated by bars)
+% Usage: \tags{Tag1}{Tag2}{Tag3}
+\newcommand{\tags}[1]{
+    \vspace{-\parskip}\noindent\par
+    {\color{secondarycolor}\textit{#1}}
+}
+
+% Helper to format multiple tags with separators
+% Usage: \taglist{Tag1, Tag2, Tag3}
+\newcommand{\taglist}[1]{
+    \tags{\def\sep{}\@for\tag:=#1\do{\sep\tag\def\sep{\enspace\vbar\enspace}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Description Environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Description list (bulleted)
 \newenvironment{descrlist} {
     \vspace{-0.35em}
     \begin{addmargin}[\descrindent]{0pt}
@@ -200,7 +238,7 @@
     \end{addmargin}
 }
 
-% Description of "experience" entry (text)
+% Description paragraph (text)
 \newenvironment{descr} {
     \vspace{-0.5em}
     \begin{addmargin}[\descrindent]{0pt}

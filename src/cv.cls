@@ -1,28 +1,28 @@
 \NeedsTeXFormat{LaTeX2e}
-\newlength{\marginsize}
-\newlength{\mainfontsize}
-\newlength{\contentindent}
-\newlength{\descrindent}
-
+\ProvidesClass{cv}[2025/11/07 Simple CV Class]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Variables to adjust
+% Class options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setlength{\marginsize}{0.8in}
+% Font size options
+\DeclareOption{10pt}{\PassOptionsToClass{10pt}{article}}
+\DeclareOption{11pt}{\PassOptionsToClass{11pt}{article}}
+\DeclareOption{12pt}{\PassOptionsToClass{12pt}{article}}
 
-\setlength{\mainfontsize}{10pt}
-\def\twocolumnratio{0.31}
-
+% Process options
+\ExecuteOptions{10pt} % default
+\ProcessOptions\relax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Setup and load packages
+% Load required packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\LoadClass[a4paper,\mainfontsize]{article}
-\RequirePackage[margin=\marginsize]{geometry}
+
+\LoadClass[a4paper]{article}
+
+\RequirePackage[margin=0.75in]{geometry} % TODO: adjustable margin
 \RequirePackage{url}
 \RequirePackage{parskip}
-\RequirePackage{paracol}
 \RequirePackage{color}
 \RequirePackage{graphicx}
 \RequirePackage{titlesec}
@@ -37,47 +37,64 @@
 \RequirePackage[unicode, draft=false]{hyperref}
 \RequirePackage{fontawesome5}
 \RequirePackage{pifont}
+\RequirePackage{marginnote}
+\RequirePackage{tcolorbox}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[bitstream-charter]{mathdesign} % Font
+\RequirePackage{paracol}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Colors
+% Customization
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Colors
 \definecolor{accentcolor}{RGB}{0, 68, 102} % Deep blue
 \definecolor{secondarycolor}{RGB}{80, 80, 80} % Dark gray
 \definecolor{linkcolour}{rgb}{0,0.2,0.6}
-\hypersetup{colorlinks,breaklinks,urlcolor=accentcolor,linkcolor=accentcolor}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Fonts
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage[bitstream-charter]{mathdesign}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Document settings
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\AtBeginDocument{
-    \vspace*{-0.8\marginsize}
+% Hyperlink setup
+\hypersetup{
+    colorlinks,
+    breaklinks,
+    urlcolor=accentcolor,
+    linkcolor=accentcolor
 }
+
+% Layout
+\newlength{\contentindent}
+\newlength{\descrindent}
+\setlength{\contentindent}{2.0em}
+\setlength{\descrindent}{2.0em}
+
+% Two-column settings
+\def\twocolumnratio{0.31}
+%\setlength{\columnseprule}{0.4pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\AtBeginDocument{
+    \vspace*{-0.6in} % Reduce top margin
+    \columnratio{\twocolumnratio}
+    \setlength\columnsep{30pt}
+}
+
 \pagestyle{empty}
-\columnratio{\twocolumnratio}
-\setlength\columnsep{30pt}
 
 \DeclareEmphSequence{\bfseries}
 
-% More variables
-\setlength{\contentindent}{2.0em}
-\setlength{\descrindent}{2.0em}
-%\setlength{\columnseprule}{0.4pt}
-
-\renewcommand{\titlerule}{\vspace{-\baselineskip}\rule{\linewidth}{0.4pt}\vspace{-\parskip}}
+% List styling
 \renewcommand\labelitemi{\ding{70}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Clean contact details formatting
+% Header
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Ensures consistent icon alignment
 \newcommand{\iconbox}[1]{\makebox[1.2em][c]{\textcolor{accentcolor}{#1}}}
 
+% COntact detail commands
 \newcommand{\phone}[1]{\href{tel:#1}{\iconbox{\faIcon{mobile-alt}} #1}}
 \newcommand{\email}[1]{\href{mailto:#1}{\iconbox{\faIcon[regular]{envelope}} #1}}
 \newcommand{\address}[1]{\iconbox{\faIcon{map-marker-alt}} #1}
@@ -87,11 +104,11 @@
 \newcommand{\website}[2]{\href{#1}{\iconbox{\faIcon{globe}} #2}}
 \newcommand{\nationality}[1]{\iconbox{\faIcon[regular]{flag}} #1}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Headers and sections formatting
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO: away from here
+\renewcommand{\titlerule}{\vspace{-\baselineskip}\rule{\linewidth}{0.4pt}\vspace{-\parskip}}
 \newcommand\vbar{\kern1pt\textcolor{secondarycolor}{\rule[-\dp\strutbox]{.6pt}{\baselineskip}}\kern1pt}
 
+% Header environment: \begin{header}{Your Name} ... \end{header}
 \newenvironment{cvheader}[1]{
     \begin{center}
         {\Huge\color{accentcolor}\textbf{#1}}\\[4pt]
@@ -100,25 +117,16 @@
     \end{center}
 }
 
-\newenvironment{horizontallist}{
-    \par
-    \begin{enumerate*}[label={},itemjoin={\enspace\vbar\enspace}]
-}{
-    \end{enumerate*}
-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newenvironment{verticallist}{
-    \par
-    \begin{enumerate}[label={},itemsep=0.35em,parsep=0pt,topsep=0.2em,leftmargin=*,align=left]
-}{
-    \end{enumerate}
-}
-
-% Document's section formatting
+% Main section title with horizontal rule
 \titleformat{\section}
     {\large\scshape\raggedright\color{accentcolor}}{}{0em}{}[\titlerule]
 \titlespacing*{\section}{0pt}{12pt}{4pt}
-% Subsection formatting: similar to section but without the horizontal rule
+
+% Subsection (Similar to section but without smallcaps and with reduced rule)
 \titleformat{\subsection}
     {\large\bfseries\raggedright}{}{0em}{\vspace{-1.0em}}[{\rule{8em}{0.4pt}}]
 \titlespacing*{\subsection}{0pt}{10pt}{0pt}
@@ -130,6 +138,28 @@
   \vspace{2pt}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Small list for skills, contact details etc.
+\newenvironment{horizontallist}{
+    \par
+    \begin{enumerate*}[label={},itemjoin={\enspace\vbar\enspace}]
+}{
+    \end{enumerate*}
+}
+
+% Vertical version
+\newenvironment{verticallist}{
+    \par
+    \begin{enumerate}[label={},itemsep=0.35em,parsep=0pt,topsep=0.2em,leftmargin=*,align=left]
+}{
+    \end{enumerate}
+}
+
+% Standard CV section with indented content:
+% \begin{cvsection}{Section Title} ... \end{cvsection}
 \newenvironment{cvsection}[1]{
     \section{#1}
     \vspace{0.25em}
@@ -138,6 +168,7 @@
     \end{addmargin}
 }
 
+% CV subsection (for nested content)
 \newenvironment{cvsubsection}[1]{
     \subsection{#1}
     \vspace{0.25em}
@@ -146,17 +177,20 @@
     \end{addmargin}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Sections content formatting
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Compact no-indent version useful for two column layout
+\newenvironment{tightcvsubsection}[1]{
+    \subsection{#1}
+    \vspace{0.25em}
+}{
+}
 
-% Header for each 'experience' entry
+% Header of "experience" entry like specific job, school etc. 
 \newcommand{\experience}[2]{
     \vspace{0.25em}
     \textbf{#1} \hfill {\color{secondarycolor}\textit{#2}}
 }
 
-% Different forms of descriptions of 'experience' entries
+% Description of "experience" entry (list form)
 \newenvironment{descrlist} {
     \vspace{-0.35em}
     \begin{addmargin}[\descrindent]{0pt}
@@ -166,43 +200,10 @@
     \end{addmargin}
 }
 
+% Description of "experience" entry (text)
 \newenvironment{descr} {
     \vspace{-0.5em}
     \begin{addmargin}[\descrindent]{0pt}
 }{
     \end{addmargin}
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Two column specific settings
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newenvironment{tightverticallist}{
-    \par
-    \begin{enumerate}[label={},itemsep=0.35em,parsep=0pt,topsep=0.2em,leftmargin=*,align=left]
-}{
-    \end{enumerate}
-}
-
-\newenvironment{tightcvsubsection}[1]{
-    \subsection{#1}
-    \vspace{0.25em}
-}{
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Sections content formatting
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Different forms of descriptions of 'experience' entries
-\newenvironment{tightdescrlist} {
-    \vspace{-0.35em}
-    \begin{itemize}[parsep=0.0em, leftmargin=*,align=left]
-} {
-    \end{itemize}
-}
-
-\newenvironment{tightdescr} {
-    \vspace{-0.5em}
-}{
 }
